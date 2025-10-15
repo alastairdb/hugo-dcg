@@ -1,0 +1,89 @@
+/* DCG Custom Color Scheme - Reddish theme to match dcgsaar.de */
+
+/* Override Tachyons color variables and classes */
+:root {
+  --dcg-red: #c41e3a;           /* Primary red for headers, links */
+  --dcg-dark-red: #a01729;      /* Darker red for hover states */
+  --dcg-light-red: #e8394d;     /* Lighter red for accents */
+  --dcg-gray-bg: #f5f5f5;       /* Light gray background like WordPress site */
+}
+
+/* Header background - change from black to red */
+.bg-black {
+  background-color: var(--dcg-red) !important;
+}
+
+/* Footer background */
+footer.bg-black {
+  background-color: var(--dcg-red) !important;
+}
+
+/* Navigation and header text colors remain white for contrast */
+.white-90 {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.hover-white:hover {
+  color: white !important;
+}
+
+/* Link colors throughout the site */
+a {
+  color: var(--dcg-red);
+}
+
+a:hover {
+  color: var(--dcg-dark-red);
+}
+
+/* Button styles */
+.bg-red {
+  background-color: var(--dcg-red);
+}
+
+.bg-red:hover {
+  background-color: var(--dcg-dark-red);
+}
+
+/* Update body background to match WordPress site */
+body.bg-near-white {
+  background-color: var(--dcg-gray-bg) !important;
+}
+
+/* Page wrapper - entire page in white box like WordPress */
+.dcg-page-wrapper {
+  max-width: 1200px;
+  margin: 2rem auto;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden; /* Ensures header/footer backgrounds don't extend beyond wrapper */
+}
+
+/* Remove default margins from main content */
+main.pb7 {
+  padding-bottom: 2rem !important;
+  padding-top: 0 !important;
+}
+
+/* Ensure header and footer fit within the wrapper */
+header, footer {
+  margin: 0;
+}
+
+/* Add padding to main content area */
+main {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .dcg-page-wrapper {
+    margin: 1rem;
+  }
+  
+  main {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
