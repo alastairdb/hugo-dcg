@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.LanguageCode }}" {{- if eq .Site.Language.LanguageDirection "rtl" }} dir="rtl" {{- end }}>
+<html lang="{{ .Site.Language.Lang }}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -24,7 +24,7 @@
     {{ end }}
 
     {{ partials.Include "site-style.html" . }}
-    <link rel="stylesheet" href="{{ "css/dcg-colors.css" | relURL }}">
+    <link rel="stylesheet" href="/css/dcg-colors.css">
     {{ partials.Include "site-scripts.html" . }}
 
     {{ block "favicon" . }}
@@ -56,12 +56,19 @@
   </head>
 
   {{- $environment := hugo.Environment | compare.Default "production" -}}
-  <body class="ma0 {{ .Param "body_classes"  | default "avenir bg-near-white"}} {{ $environment }}">
+  <body class="ma0 avenir bg-near-white {{ $environment }}">
     <!-- DCG THEME IS BEING USED -->
     <div class="dcg-page-wrapper">
       {{ block "header" . }}{{ partials.Include "site-header.html" .}}{{ end }}
       <main class="pb7" role="main">
-        {{ block "main" . }}{{ end }}
+        <div class="flex-l mw9 center">
+          <div class="w-100 w-70-l">
+            {{ block "main" . }}{{ end }}
+          </div>
+          {{ if not (.Param "hide_sidebar") }}
+            {{ partials.Include "sidebar.html" . }}
+          {{ end }}
+        </div>
       </main>
       {{ block "footer" . }}{{ partials.IncludeCached "site-footer.html" . }}{{ end }}
     </div>

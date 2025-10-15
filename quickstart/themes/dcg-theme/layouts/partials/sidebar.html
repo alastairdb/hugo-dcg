@@ -1,0 +1,54 @@
+<aside class="w-100 w-30-l pa3 pa4-l">
+  <!-- Recent Posts Section -->
+  <div class="bg-white pa3 mb4 ba b--light-gray">
+    <h3 class="f4 fw6 mb3 mid-gray">{{ i18n "recent_posts" | default "Neueste Beiträge" }}</h3>
+    {{ $recent := where .Site.RegularPages "Type" "in" (slice "post" "posts") | first 5 }}
+    {{ if $recent }}
+      <ul class="list pl0">
+        {{ range $recent }}
+          <li class="mb2">
+            <a href="{{ .RelPermalink }}" class="link dark-gray hover-blue no-underline">
+              {{ .Title }}
+            </a>
+            <div class="f6 gray">{{ .Date.Format "02.01.2006" }}</div>
+          </li>
+        {{ end }}
+      </ul>
+    {{ else }}
+      <p class="f6 gray">{{ i18n "no_posts" | default "Keine Beiträge vorhanden" }}</p>
+    {{ end }}
+  </div>
+
+  <!-- Archives Section -->
+  <div class="bg-white pa3 mb4 ba b--light-gray">
+    <h3 class="f4 fw6 mb3 mid-gray">{{ i18n "archives" | default "Archive" }}</h3>
+    <select class="w-100 pa2 ba b--light-gray" onchange="if(this.value) window.location.href=this.value">
+      <option value="">{{ i18n "select_month" | default "Monat auswählen" }}</option>
+      {{ range (.Site.RegularPages.GroupByDate "2006-01") }}
+        <option value="{{ .Key | urlize }}">{{ .Key }}</option>
+      {{ end }}
+    </select>
+  </div>
+
+  <!-- Categories Section -->
+  <div class="bg-white pa3 mb4 ba b--light-gray">
+    <h3 class="f4 fw6 mb3 mid-gray">{{ i18n "categories" | default "Kategorien" }}</h3>
+    {{ $categories := .Site.Taxonomies.categories }}
+    {{ if $categories }}
+      <ul class="list pl0">
+        {{ range $name, $taxonomy := $categories }}
+          <li class="mb1">
+            <a href="/categories/{{ $name | urlize }}/" class="link dark-gray hover-blue no-underline">
+              {{ $name | title }}
+            </a>
+            <span class="f6 gray">({{ len $taxonomy }})</span>
+          </li>
+        {{ end }}
+      </ul>
+    {{ else }}
+      <p class="f6 gray">{{ i18n "no_categories" | default "Keine Kategorien vorhanden" }}</p>
+    {{ end }}
+  </div>
+
+ 
+</aside>

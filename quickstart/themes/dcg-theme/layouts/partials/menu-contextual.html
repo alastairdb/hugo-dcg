@@ -4,9 +4,11 @@
 */}}
 
 {{- if .Params.toc -}}
-  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
-    <p class="f5 b mb3">{{ lang.Translate "whatsInThis" . }}</p>
+  <div class="bg-white pa3 mb4 ba b--light-gray">
+    <h3 class="f4 fw6 mb3 {{ $.Param "text_color" | default "mid-gray" }}">{{ i18n "whatsInThis" | default "Inhalt" }}</h3>
+    <div class="nested-list-reset nested-copy-line-height nested-links">
       {{ .TableOfContents }}
+    </div>
   </div>
 {{- end -}}
 
@@ -15,19 +17,19 @@
   https://gohugo.io/content-management/related/
 */}}
 
-{{ $related := .Site.RegularPages.Related . | collections.First 15 }}
+{{ $related := .Site.RegularPages.Related . | collections.First 5 }}
 
 {{ with $related }}
-  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
-    <p class="f5 b mb3">{{ lang.Translate "related" }}</p>
-    <ul class="pa0 list">
+  <div class="bg-white pa3 mb4 ba b--light-gray">
+    <h3 class="f4 fw6 mb3 {{ $.Param "text_color" | default "mid-gray" }}">{{ i18n "related" | default "Ähnliche Beiträge" }}</h3>
+    <ul class="pa0 list pl0">
 	   {{ range . }}
-	     <li  class="mb2">
-          <a href="{{ .RelPermalink }}">
+	     <li class="mb2">
+          <a href="{{ .RelPermalink }}" class="link dim">
             {{- .Title -}}
           </a>
         </li>
 	    {{ end }}
     </ul>
-</div>
+  </div>
 {{ end }}
