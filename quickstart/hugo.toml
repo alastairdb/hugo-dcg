@@ -1,4 +1,40 @@
 baseURL = 'https://dcgsaar.de/'
-languageCode = 'en-us'
-title = 'DCG Saar'
+defaultContentLanguage = 'de'
+defaultContentLanguageInSubdir = true
 theme = 'dcg-theme'
+
+[languages]
+  [languages.de]
+    languageName = 'Deutsch'
+    languageCode = 'de'
+    title = 'DCG Saar'
+    weight = 1
+    contentDir = 'content/de'
+    
+  [languages.zh]
+    languageName = '中文'
+    languageCode = 'zh-cn'
+    title = 'DCG萨尔'
+    weight = 2
+    contentDir = 'content/zh'
+
+[permalinks]
+  posts = '/:sections/:slug/'
+  events = '/:sections/:slug/'
+  pages = '/:slug/'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.parser]
+      autoHeadingIDType = 'github'
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[params]
+  showLanguageSwitcher = true
+
+[languages.de.params]
+  languageSwitcherText = "语言"
+  
+[languages.zh.params]
+  languageSwitcherText = "Sprache"
