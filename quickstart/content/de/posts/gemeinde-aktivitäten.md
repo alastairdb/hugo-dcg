@@ -6,6 +6,8 @@ slug: "gemeinde-aktivitäten"
 author: "Maria Schmidt"
 summary: "Übersicht über die geplanten Aktivitäten für das Frühjahr 2024."
 translationKey: "spring-activities-post"
+years: ["2024"]
+months: ["2024-02"]
 ---
 
 # Neue Gemeinde-Aktivitäten im Frühjahr

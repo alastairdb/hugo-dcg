@@ -30,6 +30,12 @@ theme = 'dcg-theme'
     [markup.goldmark.renderer]
       unsafe = true
 
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  year = "years"
+  month = "months"
+
 [params]
   showLanguageSwitcher = true
 

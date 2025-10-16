@@ -22,12 +22,46 @@
   <!-- Archives Section -->
   <div class="bg-white pa3 mb4 ba b--light-gray">
     <h3 class="f4 fw6 mb3 mid-gray">{{ i18n "archives" | default "Archive" }}</h3>
-    <select class="w-100 pa2 ba b--light-gray" onchange="if(this.value) window.location.href=this.value">
+    
+    <!-- Month-based archive dropdown -->
+    <select class="w-100 pa2 ba b--light-gray mb3" onchange="if(this.value) window.location.href=this.value">
       <option value="">{{ i18n "select_month" | default "Monat auswählen" }}</option>
-      {{ range (.Site.RegularPages.GroupByDate "2006-01") }}
-        <option value="{{ .Key | urlize }}">{{ .Key }}</option>
+      {{ $posts := where .Site.RegularPages "Type" "in" (slice "post" "posts") }}
+      {{ $validPosts := slice }}
+      {{ range $posts }}
+        {{ if and .Date (not .Date.IsZero) (gt .Date.Year 1900) }}
+          {{ $validPosts = $validPosts | append . }}
+        {{ end }}
+      {{ end }}
+      {{ range ($validPosts.GroupByDate "2006-01") }}
+        {{ $month := .Key }}
+        {{ $url := printf "/%s/posts/" $.Site.Language.Lang }}
+        <option value="{{ $url }}?month={{ $month }}">{{ .Key }} ({{ len .Pages }})</option>
       {{ end }}
     </select>
+    
+    <!-- Year-based archive links -->
+    <div class="mt3">
+      <h4 class="f5 fw6 mb2 mid-gray">{{ i18n "by_year" | default "Nach Jahr" }}</h4>
+      <ul class="list pl0">
+        {{ $posts := where .Site.RegularPages "Type" "in" (slice "post" "posts") }}
+        {{ $validPosts := slice }}
+        {{ range $posts }}
+          {{ if and .Date (not .Date.IsZero) (gt .Date.Year 1900) }}
+            {{ $validPosts = $validPosts | append . }}
+          {{ end }}
+        {{ end }}
+        {{ range ($validPosts.GroupByDate "2006") }}
+          <li class="mb1">
+            {{ $url := printf "/%s/posts/" $.Site.Language.Lang }}
+            <a href="{{ $url }}?year={{ .Key }}" class="link dark-gray hover-blue no-underline">
+              {{ .Key }}
+            </a>
+            <span class="f6 gray">({{ len .Pages }})</span>
+          </li>
+        {{ end }}
+      </ul>
+    </div>
   </div>
 
   <!-- Categories Section -->
@@ -49,6 +83,4 @@
       <p class="f6 gray">{{ i18n "no_categories" | default "Keine Kategorien vorhanden" }}</p>
     {{ end }}
   </div>
-
- 
 </aside>

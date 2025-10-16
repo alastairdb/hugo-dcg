@@ -6,6 +6,8 @@ slug: "willkommen-bei-dcg"
 author: "DCG Team"
 summary: "Ein herzliches Willkommen zu unserem neuen Blog."
 translationKey: "welcome-post"
+years: ["2024"]
+months: ["2024-01"]
 ---
 
 # Willkommen bei DCG Saar

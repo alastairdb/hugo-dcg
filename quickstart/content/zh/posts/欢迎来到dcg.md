@@ -6,6 +6,8 @@ slug: "欢迎来到dcg"
 author: "DCG团队"
 summary: "热烈欢迎来到我们的新博客。"
 translationKey: "welcome-post"
+years: ["2024"]
+months: ["2024-01"]
 ---
 
 # 欢迎来到DCG萨尔
