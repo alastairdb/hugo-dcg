@@ -1,4 +1,16 @@
 <aside class="w-100 w-30-l pa3 pa4-l">
+  <!-- Search Section -->
+  <div class="bg-white pa3 mb4 ba b--light-gray">
+    <h3 class="f4 fw6 mb3 mid-gray">{{ i18n "search" | default "Suche" }}</h3>
+    <div class="relative">
+      <input type="text" id="search-input" placeholder="{{ i18n `search_placeholder` | default `Inhalte durchsuchen...` }}" 
+             class="w-100 pa2 ba b--light-gray br2 f6">
+      <div id="search-results" class="absolute w-100 bg-white ba b--light-gray br2 mt1 dn z-1 shadow-2">
+        <div id="search-results-content" class="pa2 f6"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- Recent Posts Section -->
   <div class="bg-white pa3 mb4 ba b--light-gray">
     <h3 class="f4 fw6 mb3 mid-gray">{{ i18n "recent_posts" | default "Neueste Beiträge" }}</h3>
@@ -84,3 +96,80 @@
     {{ end }}
   </div>
 </aside>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+  const searchResultsContent = document.getElementById('search-results-content');
+  
+  // Build search index from all content
+  const searchIndex = [
+    {{ range .Site.RegularPages }}
+    {
+      title: {{ .Title | jsonify }},
+      summary: {{ .Summary | jsonify }},
+      content: {{ .Plain | jsonify }},
+      url: {{ .RelPermalink | jsonify }},
+      type: {{ .Type | jsonify }},
+      date: {{ .Date.Format "2006-01-02" | jsonify }}
+    },
+    {{ end }}
+  ];
+  
+  let searchTimeout;
+  
+  searchInput.addEventListener('input', function() {
+    clearTimeout(searchTimeout);
+    const query = this.value.trim().toLowerCase();
+    
+    if (query.length < 2) {
+      searchResults.classList.add('dn');
+      return;
+    }
+    
+    searchTimeout = setTimeout(() => {
+      const results = searchIndex.filter(item => {
+        return item.title.toLowerCase().includes(query) ||
+               item.summary.toLowerCase().includes(query) ||
+               item.content.toLowerCase().includes(query);
+      }).slice(0, 8); // Limit to 8 results
+      
+      if (results.length > 0) {
+        searchResultsContent.innerHTML = results.map(result => {
+          const title = result.title.replace(/"/g, '&quot;');
+          const summary = result.summary ? result.summary.substring(0, 100).replace(/"/g, '&quot;') + '...' : '';
+          const url = result.url.replace(/"/g, '');
+          return `
+            <div class="bb b--light-gray pb2 mb2 last-child-no-border">
+              <a href="${url}" class="link dark-gray hover-blue no-underline db">
+                <div class="fw6 f6">${title}</div>
+                <div class="f7 gray mt1">${result.type} • ${result.date}</div>
+                ${summary ? `<div class="f7 gray mt1">${summary}</div>` : ''}
+              </a>
+            </div>
+          `;
+        }).join('');
+        searchResults.classList.remove('dn');
+      } else {
+        searchResultsContent.innerHTML = '<div class="f6 gray tc pa2">{{ i18n "no_search_results" | default "Keine Ergebnisse gefunden" }}</div>';
+        searchResults.classList.remove('dn');
+      }
+    }, 300);
+  });
+  
+  // Hide search results when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+      searchResults.classList.add('dn');
+    }
+  });
+  
+  // Show results again when focusing on search input
+  searchInput.addEventListener('focus', function() {
+    if (this.value.trim().length >= 2) {
+      searchResults.classList.remove('dn');
+    }
+  });
+});
+</script>
