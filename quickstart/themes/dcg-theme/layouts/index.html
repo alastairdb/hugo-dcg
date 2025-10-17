@@ -1,4 +1,54 @@
 {{ define "main" }}
+
+  <!-- Two-column section for Ziele and Tätigkeiten -->
+  <section class="pa3 pa4-l">
+    <div class="flex-l mw9 center">
+      {{ if eq .Site.Language.Lang "zh" }}
+        <!-- Left column: Chinese version -->
+        <div class="w-100 w-50-l pr3-l mb4 mb0-l">
+          <h2 class="f3 fw6 dark-gray mb3">协会的目标</h2>
+          <ul class="list pl0 f5 lh-copy dark-gray">
+            <li class="mb2">关心和推动德中两国的社会文化关系</li>
+            <li class="mb2">支持德国与中国企业之间的经济联系</li>
+            <li class="mb2">加强科学交流</li>
+          </ul>
+        </div>
+        
+        <!-- Right column: Chinese version -->
+        <div class="w-100 w-50-l pl3-l">
+          <h2 class="f3 fw6 dark-gray mb3">协会的活动</h2>
+          <ul class="list pl0 f5 lh-copy dark-gray">
+            <li class="mb2">通过社交聚会相互了解，加深相互了解</li>
+            <li class="mb2">中国的文化，历史和地域研究活动</li>
+            <li class="mb2">中华人民共和国科学法律条件讲座</li>
+            <li class="mb2">与德国公司合作的平台</li>
+          </ul>
+        </div>
+      {{ else }}
+        <!-- Left column: German version -->
+        <div class="w-100 w-50-l pr3-l mb4 mb0-l">
+          <h2 class="f3 fw6 dark-gray mb3">Ziele des Vereins</h2>
+          <ul class="list pl0 f5 lh-copy dark-gray">
+            <li class="mb2">Pflege und Förderung der gesellschaftlichen und kulturellen Beziehungen zwischen Deutschland und China</li>
+            <li class="mb2">Unterstützung der wirtschaftlichen Kontakte zwischen Deutschland und chinesischen Unternehmen</li>
+            <li class="mb2">Intensivierung des wissenschaftlichen Austausches</li>
+          </ul>
+        </div>
+        
+        <!-- Right column: German version -->
+        <div class="w-100 w-50-l pl3-l">
+          <h2 class="f3 fw6 dark-gray mb3">Tätigkeiten des Vereins</h2>
+          <ul class="list pl0 f5 lh-copy dark-gray">
+            <li class="mb2">Gesellige Treffen, um ein Kennenlernen zu ermöglichen und somit das gegenseitige Verständnis zu vertiefen</li>
+            <li class="mb2">Veranstaltungen zu Kultur, Geschichte und Landeskunde des "Reiches der Mitte"</li>
+            <li class="mb2">Vorträge zu wissenschaftlichen und rechtlichen Gegebenheiten in der Volksrepublik China</li>
+            <li class="mb2">Plattform für Kooperationsmöglichkeiten mit deutschen Unternehmen</li>
+          </ul>
+        </div>
+      {{ end }}
+    </div>
+  </section>
+
   <article class="cf ph3 ph4-l pv3 pv4-l f4 lh-copy nested-links mid-gray">
     {{ .Content }}
   </article>
