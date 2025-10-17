@@ -3,4 +3,4 @@ title: "Veranstaltungen"
 type: "events"
 ---
 
-Hier finden Sie alle kommenden Veranstaltungen und Termine.
+Hier finden Sie alle bevorstehende Veranstaltungen und Termine.

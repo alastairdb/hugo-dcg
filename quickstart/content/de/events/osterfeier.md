@@ -1,10 +1,10 @@
 ---
-title: "Osterfeier 2024"
+title: "Osterfeier 2026"
 date: 2024-03-31T10:00:00+02:00
 type: "event"
 slug: "osterfeier"
-eventStart: "2024-03-31T10:00:00+02:00"
-eventEnd: "2024-03-31T14:00:00+02:00"
+eventStart: "2026-03-31T10:00:00+02:00"
+eventEnd: "2026-03-31T14:00:00+02:00"
 location: "Gemeindezentrum Saarbrücken"
 summary: "Gemeinsame Osterfeier mit Gottesdienst und Festmahl."
 translationKey: "easter-celebration-event"
