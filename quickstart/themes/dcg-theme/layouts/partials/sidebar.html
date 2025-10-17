@@ -119,7 +119,7 @@
       <ul class="list pl0">
         {{ range $name, $taxonomy := $categories }}
           <li class="mb1">
-            <a href="/categories/{{ $name | urlize }}/" class="link dark-gray hover-blue no-underline">
+            <a href="/{{ $.Site.Language.Lang }}/{{ (i18n "categories" | default "kategorien") | lower }}/{{ $name | urlize }}/" class="link dark-gray hover-blue no-underline">
               {{ $name | title }}
             </a>
             <span class="f6 gray">({{ len $taxonomy }})</span>
