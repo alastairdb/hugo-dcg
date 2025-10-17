@@ -2,36 +2,112 @@
 {{ if $featured_image }}
   {{/* Trimming the slash and adding absURL make sure the image works no matter where our site lives */}}
   {{ $featured_image_class := site.Params.featured_image_class | compare.Default "cover bg-top" }}
-  <header class="{{ $featured_image_class }}" style="background-image: url('{{ $featured_image }}');">
+  <header >
+    <div class="bg-black">{{ partials.Include "site-navigation.html" .}}</div>
     {{ $cover_dimming_class := site.Params.cover_dimming_class | compare.Default "bg-black-60" }}
-    <div class="{{ $cover_dimming_class }}">
-      {{ partials.Include "site-navigation.html" .}}
-      <div class="tc-l pv4 pv6-l ph3 ph4-ns">
-        <h1 class="f2 f-subheadline-l fw2 white-90 mb0 lh-title">
-          {{ .Title | compare.Default .Site.Title }}
-        </h1>
-        {{ with .Params.description }}
-          <h2 class="fw1 f5 f3-l white-80 measure-wide-l center mt3">
-            {{ . }}
-          </h2>
-        {{ end }}
+    <div class="{{ $featured_image_class }}" style="background-image: url('{{ $featured_image }}');">
+      <div class="{{ $cover_dimming_class }}">
+        <div class="tc-l pv4 pv6-l ph3 ph4-ns">
+          <h1 class="f2 f-subheadline-l fw2 white-90 mb0 lh-title">
+            {{ .Title | compare.Default .Site.Title }}
+          </h1>
+          {{ with .Params.description }}
+            <h2 class="fw1 f5 f3-l white-80 measure-wide-l center mt3">
+              {{ . }}
+            </h2>
+          {{ end }}
+        </div>
       </div>
     </div>
   </header>
 {{ else }}
   <header>
-    <div class="pb3-m pb6-l {{ .Site.Params.background_color_class | compare.Default "bg-black" }}">
+    <div class="pb3-m {{ .Site.Params.background_color_class | compare.Default "bg-black" }}">
       {{ partials.Include "site-navigation.html" . }}
-      <div class="tc-l pv3 ph3 ph4-ns">
-        <h1 class="f2 f-subheadline-l fw2 light-silver mb0 lh-title">
-          {{ .Title | compare.Default .Site.Title }}
-        </h1>
-        {{ with .Params.description }}
-          <h2 class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4">
-            {{ . }}
-          </h2>
-        {{ end }}
+      
+      <!-- Carousel Section -->
+      <div class="carousel-container relative" style="height: 400px; overflow: hidden;">
+        <!-- Slide 1 -->
+        <div class="carousel-slide absolute w-100 h-100 cover bg-top" style="background-image: url('/de/images/see.jpg'); opacity: 1; transition: opacity 1s ease-in-out;">
+          <div class="h-100 relative">
+            <div class="entry-container absolute bottom-0 left-0 ma3 pa3 bg-white-50 br2" style="max-width: 400px;">
+              <div class="entry-description-container">
+                <div class="slider-title-head">
+                  <h3 class="entry-title f4 fw6 dark-gray ma0">
+                    <a href="/de/infos" title="Links und Infos" class="link dark-gray">Links und Infos<span></span></a>
+                  </h3>
+                </div>
+                <div class="entry-content mt2">
+                  <p class="f5 dark-gray ma0">Hier finden Sie weitere Infos zu Organisationen</p>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <a class="slider-read-more-button db mt3 pa2 bg-black white link tc br2 no-underline" href="/de/infos" title="Links und Infos">Weiterlesen</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Slide 2 -->
+        <div class="carousel-slide absolute w-100 h-100 cover bg-top" style="background-image: url('/de/images/schule.jpg'); opacity: 0; transition: opacity 1s ease-in-out;">
+          <div class="h-100 relative">
+            <div class="entry-container absolute bottom-0 left-0 ma3 pa3 bg-white-50 br2" style="max-width: 400px;">
+              <div class="entry-description-container">
+                <div class="slider-title-head">
+                  <h3 class="entry-title f4 fw6 dark-gray ma0">
+                    <a href="/de/über-uns" title="Willkommen bei der Deutsch Chinesischen Gesellschaft Saar" class="link dark-gray">Willkommen bei der Deutsch Chinesischen Gesellschaft Saar<span></span></a>
+                  </h3>
+                </div>
+                <div class="entry-content mt2">
+                  <p class="f5 dark-gray ma0"></p>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <a class="slider-read-more-button db mt3 pa2 bg-black white link tc br2 no-underline" href="/de/über-uns" title="Willkommen bei der Deutsch Chinesischen Gesellschaft Saar">Weiterlesen</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Slide 3 -->
+        <div class="carousel-slide absolute w-100 h-100 cover bg-top" style="background-image: url('/de/images/mauer.jpg'); opacity: 0; transition: opacity 1s ease-in-out;">
+          <div class="h-100 relative">
+            <div class="entry-container absolute bottom-0 left-0 ma3 pa3 bg-white-50 br2" style="max-width: 400px;">
+              <div class="entry-description-container">
+                <div class="slider-title-head">
+                  <h3 class="entry-title f4 fw6 dark-gray ma0">
+                    <a href="/de/mitgliedschaft" title="Mitglieder" class="link dark-gray">Mitglieder<span></span></a>
+                  </h3>
+                </div>
+                <div class="entry-content mt2">
+                  <p class="f5 dark-gray ma0">Wollen Sie Mitglied der DCG werden?</p>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <a class="slider-read-more-button db mt3 pa2 bg-black white link tc br2 no-underline" href="/de/mitgliedschaft" title="Mitglieder">Weiterlesen</a>
+            </div>
+          </div>
+        </div>
       </div>
+      
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const slides = document.querySelectorAll('.carousel-slide');
+          let currentSlide = 0;
+          
+          function showSlide(index) {
+            slides.forEach((slide, i) => {
+              slide.style.opacity = i === index ? '1' : '0';
+            });
+          }
+          
+          function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+          }
+          
+          // Auto-advance slides every 5 seconds
+          setInterval(nextSlide, 5000);
+        });
+      </script>
     </div>
   </header>
 {{ end }}
