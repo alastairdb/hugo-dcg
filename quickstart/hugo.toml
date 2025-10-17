@@ -10,6 +10,8 @@ theme = 'dcg-theme'
     title = 'DCG Saar'
     weight = 1
     contentDir = 'content/de'
+    [languages.de.permalinks]
+        categories = '/kategorien/:slug/'
     
   [languages.zh]
     languageName = '中文'
@@ -17,6 +19,8 @@ theme = 'dcg-theme'
     title = 'DCG萨尔'
     weight = 2
     contentDir = 'content/zh'
+   [languages.zh.permalinks]
+        categories = '/分类/:slug/'
 
 [permalinks]
   posts = '/:sections/:slug/'
