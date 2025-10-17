@@ -11,6 +11,41 @@
     </div>
   </div>
 
+  <!-- Upcoming Events Section -->
+  <div class="bg-white pa3 mb4 ba b--light-gray">
+    <h3 class="f4 fw6 mb3 mid-gray">{{ i18n "upcoming_events" | default "Kommende Veranstaltungen" }}</h3>
+    {{ $now := now }}
+    {{ $events := where .Site.RegularPages "Type" "event" }}
+    {{ $upcomingEvents := slice }}
+    {{ range $events }}
+      {{ if .Params.eventStart }}
+        {{ $eventStart := time .Params.eventStart }}
+        {{ if $eventStart.After $now }}
+          {{ $upcomingEvents = $upcomingEvents | append . }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    {{ $upcomingEvents = $upcomingEvents | first 5 }}
+    {{ if $upcomingEvents }}
+      <ul class="list pl0">
+        {{ range $upcomingEvents }}
+          <li class="mb2">
+            <a href="{{ .RelPermalink }}" class="link dark-gray hover-blue no-underline">
+              {{ .Title }}
+            </a>
+            {{ if .Params.eventStart }}
+              {{ $eventStart := time .Params.eventStart }}
+              <div class="f6 gray">{{ $eventStart.Format "02.01.2006" }}</div>
+            {{ end }}
+          </li>
+        {{ end }}
+      </ul>
+    {{ else }}
+      <p class="f6 gray">{{ i18n "no_upcoming_events" | default "Keine kommenden Veranstaltungen" }}</p>
+    {{ end }}
+    <p class="f6 gray"><a href="/{{ $.Site.Language.Lang }}/events">{{ (i18n "all_events") }}</a></p>
+  </div>
+
   <!-- Recent Posts Section -->
   <div class="bg-white pa3 mb4 ba b--light-gray">
     <h3 class="f4 fw6 mb3 mid-gray">{{ i18n "recent_posts" | default "Neueste Beiträge" }}</h3>
